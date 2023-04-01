@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from core.models import Articulos
+from core.forms import ArticulosForm
+
 
 # Create your views here.
 
@@ -13,7 +15,17 @@ def muestra_articulos(request): #boton
     return render (request, 'core/mostrar_articulos.html', {"articulos": articulosx})
 
 def crea_articulos(request): #boton
-    return render (request, 'core/crear_articulos.html')
+
+    if request.method == "POST":
+        articulos_form = ArticulosForm(request.POST)
+        if articulos_form.is_valid():
+           data = articulos_form.cleaned_data
+           articulo = Articulos(titulo=data["nombre_titulo"], subtitulo=data["nombre_subtitulo"])
+           articulo.save()
+           return render(request, 'core/index.html') #si sale todo bien nos manda al inicio
+
+    articulos_form = ArticulosForm()
+    return render (request, 'core/crear_articulos.html', {"form": articulos_form})
 
 def edita_articulos(request): #sin boton
     return render (request, 'core/editar_articulos.html')

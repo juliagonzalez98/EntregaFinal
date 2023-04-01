@@ -5,10 +5,12 @@
  <table>
     <th>id</th>
     <th>titulo</th>
-    {% for articulo in articulos %}
+    {% for articulo in articulosx %}
         <tr>
-            <td>{{articulos.id}}</td>
-            <td>{{articulos.titulo}} </td>
+            <td>{{articulo.id}}</td>
+            <td>{{articulo.titulo}} </td>
+            <td>{{articulo.subtitulo}} </td>
+
         </tr>
     {% endfor %}
 

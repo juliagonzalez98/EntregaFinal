@@ -4,7 +4,7 @@ from django.db import models
 
 class Articulos(models.Model):
     titulo = models.CharField(max_length=80)
-    #subtitulo = models.TextField(max_length=140)
+    subtitulo = models.CharField(max_length=140, default="")
     #contenido = models.TextField(max_length=1400)
 
 
