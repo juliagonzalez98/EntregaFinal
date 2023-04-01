@@ -4,6 +4,9 @@ from django.db import models
 
 class Articulos(models.Model):
     titulo = models.CharField(max_length=80)
+    #subtitulo = models.TextField(max_length=140)
+    #contenido = models.TextField(max_length=1400)
+
 
     def __str__(self):
         return f"{self.id} - {self.titulo}"

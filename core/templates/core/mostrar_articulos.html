@@ -1,0 +1,17 @@
+{% extends 'core/base.html'%}
+
+{% block contenido_que_cambia %}
+
+ <table>
+    <th>id</th>
+    <th>titulo</th>
+    {% for articulo in articulos %}
+        <tr>
+            <td>{{articulos.id}}</td>
+            <td>{{articulos.titulo}} </td>
+        </tr>
+    {% endfor %}
+
+ </table>
+ 
+{% endblock contenido_que_cambia %}
