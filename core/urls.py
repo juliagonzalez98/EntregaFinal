@@ -3,9 +3,9 @@ from core.views import inicio, muestra_articulos, crea_articulos, edita_articulo
 
 urlpatterns = [
     path('', inicio, name="index"),
-    path('mostrar-articulos', muestra_articulos, name="mostrar"),
-    path('crear-articulos', crea_articulos, name="crear"),
-    path ('editar-articulos', edita_articulos, name="editar"),
-    path('eliminar-articulos', elimina_articulos, name="eliminar")
+    path('mostrar-articulos/', muestra_articulos, name="mostrar"),
+    path('crear-articulos/', crea_articulos, name="crear"),
+    path ('editar-articulos/', edita_articulos, name="editar"),
+    path('eliminar-articulos/<int:id_articulo>', elimina_articulos, name="eliminar")
     
 ]

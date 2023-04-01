@@ -30,5 +30,9 @@ def crea_articulos(request): #boton
 def edita_articulos(request): #sin boton
     return render (request, 'core/editar_articulos.html')
 
-def elimina_articulos(request): #sin boton 
-    return render (request, 'core/eliminar_articulos.html')
+def elimina_articulos(request, id_articulo): #sin boton
+    articulo = Articulos.objects.get(id=id_articulo)
+    name = articulo.titulo
+    articulo.delete()
+    
+    return render (request, 'core/eliminar_articulos.html',{"articulo_eliminado": name} )
