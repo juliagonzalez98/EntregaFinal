@@ -5,12 +5,12 @@
  <table>
     <th>id</th>
     <th>titulo</th>
-    {% for articulo in articulosx %}
+    {% for articulo in articulos %}
         <tr>
             <td>{{articulo.id}}</td>
             <td>{{articulo.titulo}} </td>
             <td>{{articulo.subtitulo}} </td>
-            <td><a href={% url 'eliminar' articulo.id %}"">Eliminar</a></td>
+            <td><a href="{% url 'eliminar' articulo.id %}">Eliminar</a></td>
         </tr>
     {% endfor %}
 
