@@ -10,7 +10,8 @@
             <td>{{articulo.id}}</td>
             <td>{{articulo.titulo}} </td>
             <td>{{articulo.subtitulo}} </td>
-            <td><a href="{% url 'eliminar' articulo.id %}">Eliminar</a></td>
+            <td><a href="{% url 'editar' articulo.id %}">Editar</a></td>
+            <td><a href="{% url 'eliminar' articulo.id %}">Eliminar</a></td>      
         </tr>
     {% endfor %}
 
