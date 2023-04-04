@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from core.models import Articulos
-from core.forms import ArticulosForm
+from core.forms import ArticulosForm, UserRegisterForm
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-
+from django.contrib.auth import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
 
