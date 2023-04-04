@@ -20,13 +20,13 @@ def login_request(request):
             if user is not None:
                 login(request, user)
 
-                return render(request, "core/index.html", {"mensaje":f"Bienvenido {usuario}"})
+                return render(request, "user/base.html", {"mensaje":f"Bienvenido {usuario}"})
             else:
-                return render(request, "core/index.html", {"mensaje":"Datos incorrectos. Ingreselos nuevamente"})
+                return render(request, "user/base.html", {"mensaje":"Datos incorrectos. Ingreselos nuevamente"})
            
         else:
 
-            return render(request, "core/index.html", {"mensaje":"Formulario erroneo"})
+            return render(request, "user/base.html", {"mensaje":"Formulario erroneo"})
 
     form = AuthenticationForm()
 
@@ -39,7 +39,7 @@ def register(request):
 
                 username = form.cleaned_data['username']
                 form.save()
-                return render(request,"core/index.html" ,  {"mensaje":"Usuario Creado Exitosamente"})
+                return render(request,"user/base.html" ,  {"mensaje":"Usuario Creado Exitosamente"})
 
     else:     
         form = UserRegisterForm()     

@@ -52,6 +52,8 @@ def elimina_articulos(request, id_articulo):
     
     return render (request, 'core/eliminar_articulos.html', {"articulo_eliminado": name} )
 
+def acerca_de_mi(request):
+    return render (request, 'core/sobre_mi.html')
 
 
 
