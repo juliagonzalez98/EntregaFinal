@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
+from user.forms import UserRegisterForm
 
 # Create your views here.
 
@@ -30,4 +31,18 @@ def login_request(request):
     form = AuthenticationForm()
 
     return render(request, "user/login.html", {"form": form})
+
+def register(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+
+                username = form.cleaned_data['username']
+                form.save()
+                return render(request,"core/index.html" ,  {"mensaje":"Usuario Creado Exitosamente"})
+
+    else:     
+        form = UserRegisterForm()     
+
+    return render(request,"user/registro.html" , {"form":form})
 
