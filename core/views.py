@@ -4,6 +4,7 @@ from core.forms import ArticulosForm
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 
 # Create your views here.
@@ -69,15 +70,18 @@ class ArticulosDetalle(DetailView):
 class ArticulosCreate(CreateView):
     model = Articulos
     tamplate_name = "core/articulos_crear.html"
+    success_url = 'core/mostrar_view/'    
     fields = ['titulo', 'subtitulo']
 
 class ArticulosUpdate(UpdateView):
     model = Articulos
     template_name = "core/articulos_editar.html"
+    success_url = 'core/mostrar_view/'
     fields = ['titulo', 'subtitulo']
 
 class ArticulosDelete(DeleteView):
     model = Articulos
     template_name = "core/articulos_eliminar.html"
-    
+    success_url = 'core/mostrar_view/'
+
 
