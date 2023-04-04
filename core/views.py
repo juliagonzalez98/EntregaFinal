@@ -1,12 +1,8 @@
 from django.shortcuts import render
 from core.models import Articulos
-from core.forms import ArticulosForm, UserRegisterForm
-from django.views.generic import ListView
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from django.contrib.auth import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, logout, authenticate
+from core.forms import ArticulosForm
+
+
 
 # Create your views here.
 
@@ -56,33 +52,6 @@ def elimina_articulos(request, id_articulo):
     
     return render (request, 'core/eliminar_articulos.html', {"articulo_eliminado": name} )
 
-class ArticulosList(ListView):
-    model = Articulos
-    template_name = "core/articulos_list.html"
 
-    def get(self, request, *args, **kwargs):
-        return super().get(request,**args, **kwargs)
-        
-
-class ArticulosDetalle(DetailView):
-    model = Articulos
-    template_name = "core/articulos_detalle.html"
-
-class ArticulosCreate(CreateView):
-    model = Articulos
-    tamplate_name = "core/articulos_crear.html"
-    success_url = 'core/mostrar_view/'    
-    fields = ['titulo', 'subtitulo']
-
-class ArticulosUpdate(UpdateView):
-    model = Articulos
-    template_name = "core/articulos_editar.html"
-    success_url = 'core/mostrar_view/'
-    fields = ['titulo', 'subtitulo']
-
-class ArticulosDelete(DeleteView):
-    model = Articulos
-    template_name = "core/articulos_eliminar.html"
-    success_url = 'core/mostrar_view/'
 
 
