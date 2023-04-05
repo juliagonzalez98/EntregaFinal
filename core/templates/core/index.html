@@ -60,8 +60,10 @@
           <div class="col-md-7">
             <h1>Bienvenidos a RECOMENDAME</h1>
             <h3>Si no sabes que película o serie mirar estás en el lugar indicado</h3>
-            <a href="#" class="btn btn-lg btn-red">REGISTRARME <span class="ti-arrow-right"></span></a>
-            <a href="#" class="btn btn-lg btn-red"> INICIAR SESION <span class="ti-arrow-right"></span></a>
+            <a href="{% url 'registro' %}"  class="btn btn-lg btn-red">REGISTRARME <span class="ti-arrow-right"></span></a>
+            {% if not request.user.is_auhenticated %}
+            <a href="{% url 'login' %}" class="btn btn-lg btn-red"> INICIAR SESION <span class="ti-arrow-right"></span></a>
+            {% endif %}
 
           </div>
           <div class="col-md-5 hidden-xs">

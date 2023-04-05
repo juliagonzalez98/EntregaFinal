@@ -1,13 +1,12 @@
 {% extends 'core/base.html'%}
 
 {% block contenido_que_cambia %}
+{% csrf_token %}
 
+ACA VA EL DETALLE DE LOS ARTICULOS
 
 {% if mensaje %}
 {{mensaje}}
 {% endif %}
-
-<td><a href="{% url 'index' %}">VOLVER A INICIO</a></td>
-<td><a href="{% url 'login' %}">INICIAR SESION</a></td>
 
 {% endblock contenido_que_cambia %}
