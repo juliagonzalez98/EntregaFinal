@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-from user.forms import UserRegisterForm
+from user.forms import UserRegisterForm, AvatarForm
 from user.models import *
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 
@@ -21,7 +23,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
 
-                return render(request, "user/detalle.html", {"mensaje":f"Bienvenido {usuario}"})
+                return render(request, "user/detalle_usuario.html", {"mensaje":f"Bienvenido {usuario}"})
             else:
                 return render(request, "user/base.html", {"mensaje":"Datos incorrectos. Ingreselos nuevamente"})
            
@@ -35,15 +37,23 @@ def login_request(request):
 
 def register(request):
     if request.method == "POST":
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
+        user_form = UserRegisterForm(request.POST)
+        avatar_form = AvatarForm(request.POST, request.FILES)
+        if user_form.is_valid() and avatar_form.is_valid():
+            user = user_form.save(commit=False)
+            user.save()
 
-                username = form.cleaned_data['username']
-                form.save()
-                return render(request,"user/base.html" ,  {"mensaje":"Usuario Creado Exitosamente"})
+            avatar = avatar_form.save(commit=False)
+            avatar.save()
+            return render(request,"user/base.html" ,  {"mensaje":"Usuario Creado Exitosamente"})
 
     else:     
-        form = UserRegisterForm()     
+        user_form = UserRegisterForm()
+        avatar_form = AvatarForm()   
 
-    return render(request,"user/registro.html" , {"form":form})
+    context = {'user_form': user_form, 'avatar_form': avatar_form}
+    return render(request, 'user/registro.html', context)
+    
+
+
 

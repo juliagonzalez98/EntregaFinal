@@ -9,7 +9,7 @@
 <body>
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.as_table }}
         <button type="submit">REGISTRARME</button>
         <td><a href="{% url 'index' %}">Volver a inicio</a></td>
 
