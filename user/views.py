@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from user.forms import UserRegisterForm
+from user.models import *
 
 # Create your views here.
 
