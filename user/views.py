@@ -37,23 +37,31 @@ def login_request(request):
 
 def register(request):
     if request.method == "POST":
-        user_form = UserRegisterForm(request.POST)
-        avatar_form = AvatarForm(request.POST, request.FILES)
-        if user_form.is_valid() and avatar_form.is_valid():
-            user = user_form.save(commit=False)
-            user.save()
-
-            avatar = avatar_form.save(commit=False)
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+                
+            username = form.cleaned_data['username']
+            user = form.save()
+            avatar = Avatar(user=user, imagen=request.FILES.get('imagen'))
             avatar.save()
             return render(request,"user/base.html" ,  {"mensaje":"Usuario Creado Exitosamente"})
-
     else:     
-        user_form = UserRegisterForm()
-        avatar_form = AvatarForm()   
-
-    context = {'user_form': user_form, 'avatar_form': avatar_form}
-    return render(request, 'user/registro.html', context)
+        form = UserRegisterForm()     
     
+    return render(request,"user/registro.html" , {"form":form})
+
+def  agrega_avatar(request):
+    if request.method == "POST":
+        miFormulario = AvatarForm(request.POST, request.FILES)
+
+        if miFormulario.is_valid():
+            u = User.objects.get(username=request.user)
+            avatar = Avatar(user = u, imagen=miFormulario.cleaned_data['imagen'])
+            avatar.save()
+            return render (request,"user/base.html", {"mensaje":"Usuario Creado Exitosamente"})
+    else:
+        miFormulario = AvatarForm()
+    return render(request, "user/agregar_avatar.html", {"miFormulario": miFormulario })
 
 
 
