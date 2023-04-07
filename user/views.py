@@ -4,6 +4,9 @@ from django.contrib.auth import login, logout, authenticate
 from user.forms import UserRegisterForm, AvatarForm
 from user.models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+
 
 
 # Create your views here.
@@ -39,15 +42,11 @@ def register(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-                
-            username = form.cleaned_data['username']
-            user = form.save()
-            avatar = Avatar(user=user, imagen=request.FILES.get('imagen'))
-            avatar.save()
-            return render(request,"user/base.html" ,  {"mensaje":"Usuario Creado Exitosamente"})
+                username = form.cleaned_data['username']
+                form.save()
+                return render(request,"user/base.html" ,  {"mensaje":"Usuario Creado Exitosamente"})
     else:     
         form = UserRegisterForm()     
-    
     return render(request,"user/registro.html" , {"form":form})
 
 def  agrega_avatar(request):
@@ -62,6 +61,5 @@ def  agrega_avatar(request):
     else:
         miFormulario = AvatarForm()
     return render(request, "user/agregar_avatar.html", {"miFormulario": miFormulario })
-
 
 
