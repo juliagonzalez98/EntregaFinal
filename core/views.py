@@ -21,9 +21,9 @@ def crea_articulos(request):
         articulos_form = ArticulosForm(request.POST)
         if articulos_form.is_valid():
            data = articulos_form.cleaned_data
-           articulo = Articulos(titulo=data["nombre_titulo"], subtitulo=data["nombre_subtitulo"])
+           articulo = Articulos(titulo=data["nombre_titulo"], subtitulo=data["nombre_subtitulo"], cuerpo=data["cuerpo"], autor=data["autor"],fecha=data["fecha"], imagen=data["imangen"] )
            articulo.save()
-           return render(request, 'core/index.html') #si sale todo bien nos manda al inicio
+           return render(request, 'core/index.html') #si sale todo bien nos manda a inicio
 
     articulos_form = ArticulosForm()
     return render (request, 'core/crear_articulos.html', {"form": articulos_form})
@@ -53,7 +53,7 @@ def elimina_articulos(request, id_articulo):
     return render (request, 'core/eliminar_articulos.html', {"articulo_eliminado": name} )
 
 def acerca_de_mi(request):
-    return render (request, 'core/sobre_mi.html')
+    return render (request, 'core/about.html')
 
 
 
