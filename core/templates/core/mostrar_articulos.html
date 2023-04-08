@@ -1,21 +1,25 @@
 {% extends 'core/base.html'%}
 
 {% block contenido_que_cambia %}
+<h1>ESTAS SON ALGUNAS DE LAS RECOMENDACIONES</h1>
+<ul>
+<div class="blog-container">
 
- <table>
-    <th>id</th>
-    <th>titulo</th>
-    <th>subtitulo</th>
     {% for articulo in articulos %}
         <tr>
-            <td>{{articulo.id}}</td>
-            <td>{{articulo.titulo}} </td>
-            <td>{{articulo.subtitulo}} </td>
+        <div class="blog-box">
+            <h2>{{articulo.id}}</h2>
+            <h3>{{articulo.titulo}} </h3>
+            <h4>{{articulo.subtitulo}} </h4>
+            <p> Por {{articulo.autor}} el día {{articulo.fecha}}</p>
+            <img src="{{articulo.imagen}}" alt="Imagen de {{articulo.titulo}}">
+            <a href="{% url 'detalle' articulo.id %}">Leer más</a>
             <td><a href="{% url 'editar' articulo.id %}">Editar</a></td>
-            <td><a href="{% url 'eliminar' articulo.id %}">Eliminar</a></td>      
+            <td><a href="{% url 'eliminar' articulo.id %}">Eliminar</a></td>    
+        </div>
         </tr>
     {% endfor %}
+</div>
+</ul>
 
- </table>
- 
 {% endblock contenido_que_cambia %}

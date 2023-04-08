@@ -12,7 +12,7 @@ def inicio(request):
 def crea_articulos(request): 
 
     if request.method == "POST":
-        articulos_form = ArticulosForm(request.POST)
+        articulos_form = ArticulosForm(request.POST, request.FILES)
         if articulos_form.is_valid():
            data = articulos_form.cleaned_data
            articulo = Articulos(titulo=data["nombre_titulo"], subtitulo=data["nombre_subtitulo"], cuerpo=data["cuerpo"], autor=data["autor"],fecha=data["fecha"], imagen=data["imangen"] )
@@ -32,7 +32,7 @@ def muestra_articulos(request):
 
 def detalla_articulos(request, pk):
     blog = get_object_or_404(Articulos, pk=pk)
-    return render(request, 'detalla_articulos.html', {'blog':blog})
+    return render(request, 'core/detalla_articulos.html', {'blog':blog})
 
 def edita_articulos(request, id_articulo):
     articulo = Articulos.objects.get(id=id_articulo)

@@ -1,15 +1,12 @@
 {% extends 'core/base.html'%}
 
 {% block contenido_que_cambia %}
-
-<form action="" method="POST">
+<h1> INGRESE SU RECOMENDACION DE SERIES O PELICULAS</h1>
+<form method="POST" enctype="multipart/articulos_form-data">
     {% csrf_token %}
-<table>
-
-    {{ form.as_table }}
-
-</table>
-<input type="submit"  value="AGREGAR">
+    {{ form.as_p}}
+    <button type="submit">Agregar</button>
 </form>
+
 
 {% endblock contenido_que_cambia %}
