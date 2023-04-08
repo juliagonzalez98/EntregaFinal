@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from core.models import Articulos
 from core.forms import ArticulosForm
 
@@ -9,12 +9,6 @@ from core.forms import ArticulosForm
 def inicio(request):
     return render(request, 'core/index.html')
 
-def muestra_articulos(request): 
-
-    articulosx = Articulos.objects.all()
-    
-    return render (request, 'core/mostrar_articulos.html', {"articulos": articulosx})
-
 def crea_articulos(request): 
 
     if request.method == "POST":
@@ -23,10 +17,22 @@ def crea_articulos(request):
            data = articulos_form.cleaned_data
            articulo = Articulos(titulo=data["nombre_titulo"], subtitulo=data["nombre_subtitulo"], cuerpo=data["cuerpo"], autor=data["autor"],fecha=data["fecha"], imagen=data["imangen"] )
            articulo.save()
-           return render(request, 'core/index.html') #si sale todo bien nos manda a inicio
-
-    articulos_form = ArticulosForm()
+           id = articulo.id
+           return render(request, 'core/mostrar_articulos.html', {'articulo.id':id}) #si sale todo bien nos manda a la lista de articulos
+    else:
+        articulos_form = ArticulosForm()
     return render (request, 'core/crear_articulos.html', {"form": articulos_form})
+
+
+def muestra_articulos(request): 
+
+    articulosx = Articulos.objects.all()
+    
+    return render (request, 'core/mostrar_articulos.html', {"articulos": articulosx})
+
+def detalla_articulos(request, pk):
+    blog = get_object_or_404(Articulos, pk=pk)
+    return render(request, 'detalla_articulos.html', {'blog':blog})
 
 def edita_articulos(request, id_articulo):
     articulo = Articulos.objects.get(id=id_articulo)
