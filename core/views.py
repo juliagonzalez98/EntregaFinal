@@ -18,7 +18,7 @@ def crea_articulos(request):
            articulo = Articulos(titulo=data["nombre_titulo"], subtitulo=data["nombre_subtitulo"], cuerpo=data["cuerpo"], autor=data["autor"],fecha=data["fecha"], imagen=data["imangen"] )
            articulo.save()
            id = articulo.id
-           return render(request, 'core/mostrar_articulos.html', {'articulo.id':id}) #si sale todo bien nos manda a la lista de articulos
+           return render(request, 'core/crear_articulos.html', {'articulo.id':id}) #si sale todo bien nos manda a la lista de articulos
     else:
         articulos_form = ArticulosForm()
     return render (request, 'core/crear_articulos.html', {"form": articulos_form})
@@ -31,8 +31,8 @@ def muestra_articulos(request):
     return render (request, 'core/mostrar_articulos.html', {"articulos": articulosx})
 
 def detalla_articulos(request, pk):
-    blog = get_object_or_404(Articulos, pk=pk)
-    return render(request, 'core/detalla_articulos.html', {'blog':blog})
+    articulo = get_object_or_404(Articulos, pk=pk)
+    return render(request, 'core/detalla_articulos.html', {'articulo':articulo})
 
 def edita_articulos(request, id_articulo):
     articulo = Articulos.objects.get(id=id_articulo)

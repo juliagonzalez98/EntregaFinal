@@ -1,15 +1,17 @@
 {% extends 'core/base.html'%}
-{% block contenido %}
+{% block contenido_que_cambia %}
 <h1> PELICULAS Y SERIES RECOMENDADOS POR OTROS </h1>   
-{% csrf_token %}
-  
+
+  {% csrf_token %}
   <ul>    
-  <div class ="blog-container">
+  <div class ="articulo-container">
   <h2> {{articulo.titulo}}</h2>
   <h3> {{articulo.subtitulo}}</h3>
   <p> {{ articulo.cuerpo }}</p>
   <p> Por {{articulo.autor}} el {{articulo.fecha}}</p>
-  <img src="{{articulo.imagen.url}}" alt="Imagen de {{articulo.titulo}}">
+  {% if articulo.imagen %}
+  <img src="{{articulo.imagen.url}}" alt="Imagen de {{articulo.titulo}}" width="200" height="300">
+{% endif %}
 </div>
    </ul>
 {% endblock %}

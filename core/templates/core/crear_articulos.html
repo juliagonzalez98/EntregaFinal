@@ -2,11 +2,10 @@
 
 {% block contenido_que_cambia %}
 <h1> INGRESE SU RECOMENDACION DE SERIES O PELICULAS</h1>
-<form method="POST" enctype="multipart/articulos_form-data">
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p}}
+    {{ form.as_p }}
     <button type="submit">Agregar</button>
 </form>
 
-
-{% endblock contenido_que_cambia %}
+{% endblock %}
