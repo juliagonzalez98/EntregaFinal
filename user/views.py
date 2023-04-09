@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.shortcuts import render,redirect
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth import login, logout, authenticate
 from user.forms import UserRegisterForm, AvatarForm, UserEditForm
 from user.models import *
+from core.models import Articulos
+from user.views import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
@@ -23,11 +25,12 @@ def login_request(request):
             contrasenia = form.cleaned_data.get('password')
 
             user = authenticate(username= usuario, password=contrasenia)
+            articulosx = Articulos.objects.all()
 
             if user is not None:
                 login(request, user)
 
-                return render(request, "core/detalla_articulos.html", {"mensaje":f"Bienvenido {usuario}"})
+                return render(request, "core/mostrar_articulos.html", {"articulos": articulosx,"mensaje":f"Bienvenido {usuario}"})
             else:
                 return render(request, "user/base.html", {"mensaje":"Datos incorrectos. Ingreselos nuevamente"})
            
@@ -78,3 +81,7 @@ def editarPerfil(request):
         miFormulario = UserEditForm(instance=usuario)
 
     return render(request, "user/editar-perfil.html", {"miFormulario": miFormulario, "usuario": usuario})
+
+@login_required
+def detallaUser(request):
+   return render(request, "user/detalle_usuario.html" )

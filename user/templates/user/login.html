@@ -8,9 +8,12 @@
 </head>
 <body>
     <form action="" method="POST">
+   
         {% csrf_token %}
             {{ form.as_p }}
         <button type="submit">Inciar sesion</button>
+        <td><a href="{% url 'index' %}">VOLVER A INICIO</a></td>
+        
     </form>
 </body>
 </html>

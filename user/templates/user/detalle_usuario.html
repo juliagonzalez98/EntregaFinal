@@ -2,22 +2,22 @@
 
 {% block contenido_que_cambia %}
 
-ACA VA EL DETALLE DE LOS ARTICULOS
+ACA VA EL DETALLE DE LOS USUARIOS
 
 <h1>
 {% if mensaje %}
 {{mensaje}}
 {% endif %}
 </h1>
-
+<h2>
 {% if request.user.is_auhenticated %}
 <td><a href="{% url 'logout' %}">Salir</a></td>
 {% endif %}
 {% if request.user.is_auhenticated %}
    <h3 class="text-muted small mb-4 mb-lg-0">
     <img src="{{imagen}}" style="height: 40px; width: 45px;">
-
-
 {% endif %}
+   </h2>
 
+   
 {% endblock contenido_que_cambia %}

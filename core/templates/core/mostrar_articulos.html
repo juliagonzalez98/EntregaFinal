@@ -1,7 +1,14 @@
 {% extends 'core/base.html'%}
-
 {% block contenido_que_cambia %}
+{% csrf_token %}
 <h1>ESTAS SON ALGUNAS DE LAS RECOMENDACIONES</h1>
+
+<h1>
+    
+    {% if mensaje %}
+    {{mensaje}}
+    {% endif %}
+    </h1>
 <ul>
 <div class="blog-container">
 

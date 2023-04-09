@@ -1,8 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from user.models import Avatar
-
 
 
 class UserRegisterForm(UserCreationForm):
@@ -23,9 +22,6 @@ class UserRegisterForm(UserCreationForm):
        if not avatar:
         raise forms.ValidationError("Debe seleccionar una imagen para su avatar.")
        return avatar
-
-
-
 
 
 class AvatarForm(forms.ModelForm):
