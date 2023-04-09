@@ -1,3 +1,9 @@
+{% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        <strong>Error:</strong> {{ form.non_field_errors }}
+    </div>
+{% endif %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +15,7 @@
 <body>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+            {{ form.as_p }}
         <button type="submit">REGISTRARME</button>
         <td><a href="{% url 'index' %}">Volver a inicio</a></td>
 

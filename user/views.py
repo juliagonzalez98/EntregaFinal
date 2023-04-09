@@ -6,6 +6,7 @@ from user.models import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
+from django.contrib.auth.models import User
 
 
 
@@ -64,30 +65,16 @@ def  agrega_avatar(request):
 
 @login_required
 def editarPerfil(request):
-
     usuario = request.user
 
     if request.method == 'POST':
-
-        miFormulario = UserEditForm(request.POST)
-
+        miFormulario = UserEditForm(request.POST, request.FILES, instance=usuario)
         if miFormulario.is_valid():
-
-            informacion = miFormulario.cleaned_data
-
-            usuario.email = informacion['email']
-            usuario.password1 = informacion['password1']
-            usuario.password2 = informacion['password2']
-            usuario.name = informacion['last_name']
-            usuario.imagen = informacion['first_name']
-
+            usuario = miFormulario.save(commit=False)
+            usuario.set_password(miFormulario.cleaned_data["password1"])
             usuario.save()
-
-            return render(request, "user/editar-perfil.html")
-
+            return(request, "user/detalle_usuario.html")
     else:
-
-        miFormulario = UserEditForm(initial={'email': usuario.email})
+        miFormulario = UserEditForm(instance=usuario)
 
     return render(request, "user/editar-perfil.html", {"miFormulario": miFormulario, "usuario": usuario})
-

@@ -13,16 +13,13 @@ def crea_articulos(request):
 
     if request.method == "POST":
         articulos_form = ArticulosForm(request.POST, request.FILES)
-        if articulos_form.is_valid():
-           data = articulos_form.cleaned_data
-           articulo = Articulos(titulo=data["nombre_titulo"], subtitulo=data["nombre_subtitulo"], cuerpo=data["cuerpo"], autor=data["autor"],fecha=data["fecha"], imagen=data["imangen"] )
-           articulo.save()
-           id = articulo.id
-           return render(request, 'core/crear_articulos.html', {'articulo.id':id}) #si sale todo bien nos manda a la lista de articulos
+        if articulos_form.is_valid():          
+           articulos_form.save()
+           id = articulos_form.id
+           return render(request, 'core/mostrar_articulos.html', {'articulo.id':id}) #si sale todo bien nos manda a la lista de articulos
     else:
         articulos_form = ArticulosForm()
     return render (request, 'core/crear_articulos.html', {"form": articulos_form})
-
 
 def muestra_articulos(request): 
 
@@ -39,7 +36,6 @@ def edita_articulos(request, id_articulo):
 
     if request.method == "POST":
         articulo_form = ArticulosForm(request.POST)
-        print(articulo_form)
         if articulo_form.is_valid():
             data = articulo_form.cleaned_data
             articulo.titulo = data["nombre_titulo"]

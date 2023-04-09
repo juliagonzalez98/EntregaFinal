@@ -5,7 +5,7 @@ urlpatterns = [
     path('mostrar-articulos/', muestra_articulos, name="mostrar"),
     path('detalle/<int:pk>/', detalla_articulos, name="detalle"),
     path('crear-articulos/', crea_articulos, name="crear"),
-    path ('editar-articulos/<id_articulo>/', edita_articulos, name="editar"),
+    path('editar-articulos/<id_articulo>/', edita_articulos, name="editar"),
     path('eliminar-articulos/<id_articulo>/', elimina_articulos, name="eliminar"),
     path('AboutMe', acerca_de_mi, name="AboutMe"),
     path('user/', include('user.urls')),

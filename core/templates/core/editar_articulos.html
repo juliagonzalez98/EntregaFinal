@@ -1,15 +1,12 @@
 {% extends 'core/base.html'%}
 
 {% block contenido_que_cambia %}
+<h1>Editar artículo</h1>
 
-<form action="" method="POST">
+<form method="post">
     {% csrf_token %}
-<table>
-
-    {{ form.as_table }}
-
-</table>
-<input type="submit"  value="EDITAR">
-</form>
+    {{ form.as_p }}
+    <button type="submit">Guardar cambios</button>
+  </form>
 
 {% endblock contenido_que_cambia %}
