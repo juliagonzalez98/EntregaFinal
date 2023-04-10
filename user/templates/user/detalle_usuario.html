@@ -1,23 +1,34 @@
-{% csrf_token %}
-
+{% extends 'user/base.html'%}
 {% block contenido_que_cambia %}
-
-ACA VA EL DETALLE DE LOS USUARIOS
-
-<h1>
-{% if mensaje %}
-{{mensaje}}
-{% endif %}
-</h1>
-<h2>
-{% if request.user.is_auhenticated %}
-<td><a href="{% url 'logout' %}">Salir</a></td>
-{% endif %}
-{% if request.user.is_auhenticated %}
-   <h3 class="text-muted small mb-4 mb-lg-0">
-    <img src="{{imagen}}" style="height: 40px; width: 45px;">
-{% endif %}
-   </h2>
-
-   
+    <h1>DETALLE DE LOS USUARIOS</h1>
+    {% if mensaje %}
+        <h2>{{ mensaje }}</h2>
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>NOMBRE DEL USUARIO:</td>
+                <td>{{ usuario.username }}</td>
+            </tr>
+            <tr>
+                <td>EMAIL DEL USUARIO:</td>
+                <td>{{ usuario.email }}</td>
+            </tr>
+            <tr>
+                <td>DESCRIPCION:</td>
+                <td>{{ usuario.descripcion }}</td>
+            </tr>
+            <tr>
+                <td>
+                    {% if usuario.imagen %}
+                        <img src="{{ usuario.imagen.url }}" style="height: 40px; width: 45px;">
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+        <br>
+        <td><a href="{% url 'logout' %}">CERRAR SESION</a></td>
+        <td><a href="{% url 'index' %}">volver a inicio</a></td>
+    </form>
 {% endblock contenido_que_cambia %}

@@ -14,8 +14,15 @@ def crea_articulos(request):
 
     if request.method == "POST":
         articulos_form = ArticulosForm(request.POST, request.FILES)
-        if articulos_form.is_valid():          
-           articulos_form.save()
+        if articulos_form.is_valid():  
+           data = articulos_form.cleaned_data
+           titulo = data["titulo"]
+           subtitulo = data["subtitulo"]
+           cuerpo = data["cuerpo"]
+           autor = data["autor"]
+           imagen = data["imagen"]
+           artic = Articulos(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, imagen=imagen)
+           artic.save()
            id = articulos_form.id
            return render(request, 'core/mostrar_articulos.html', {'articulo.id':id}) #si sale todo bien nos manda a la lista de articulos
     else:

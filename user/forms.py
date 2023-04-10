@@ -35,11 +35,11 @@ class UserEditForm(UserCreationForm):
     password1 = forms.CharField(label='Ingrese su nueva ontraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repetir la contraseña', widget=forms.PasswordInput)
     name = forms.CharField()
-    imagen = forms.ImageField()
+    #imagen = forms.ImageField()
     descripcion = forms.CharField(label="Ingrese una breve descripción")
     
 
     class Meta:
         model = User
-        fields = ['email', 'password1', 'password2', 'name', 'imagen', 'descripcion']
+        fields = ['email', 'password1', 'password2', 'name', 'descripcion'] #'imagen', 'descripcion']
 

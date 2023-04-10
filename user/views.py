@@ -76,7 +76,7 @@ def editarPerfil(request):
             usuario = miFormulario.save(commit=False)
             usuario.set_password(miFormulario.cleaned_data["password1"])
             usuario.save()
-            return(request, "user/detalle_usuario.html")
+            return(request, "user/detalle_usuario.html", {"mensaje":"Cambios guardados"})
     else:
         miFormulario = UserEditForm(instance=usuario)
 
@@ -84,4 +84,5 @@ def editarPerfil(request):
 
 @login_required
 def detallaUser(request):
-   return render(request, "user/detalle_usuario.html" )
+   usuario = request.user
+   return render(request, "user/detalle_usuario.html", {'usuario': usuario})
