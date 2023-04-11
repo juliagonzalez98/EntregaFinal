@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 def inicio(request):
     return render(request, 'core/index.html')
+
 @login_required
 def crea_articulos(request): 
 
@@ -21,10 +22,10 @@ def crea_articulos(request):
            cuerpo = data["cuerpo"]
            autor = data["autor"]
            imagen = data["imagen"]
-           artic = Articulos(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, imagen=imagen)
-           artic.save()
-           id = articulos_form.id
-           return render(request, 'core/mostrar_articulos.html', {'articulo.id':id}) #si sale todo bien nos manda a la lista de articulos
+           articulo = Articulos(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, imagen=imagen)
+           articulo.save()
+           id = articulo.id
+           return render(request, 'core/mostrar_articulos.html', {'articulo.id':id, 'articulo':articulo}) #si sale todo bien nos manda a la lista de articulos
     else:
         articulos_form = ArticulosForm()
     return render (request, 'core/crear_articulos.html', {"form": articulos_form})
@@ -46,16 +47,20 @@ def edita_articulos(request, id_articulo):
     articulo = Articulos.objects.get(id=id_articulo)
 
     if request.method == "POST":
-        articulo_form = ArticulosForm(request.POST)
+        articulo_form = ArticulosForm(request.POST, request.FILES)
         if articulo_form.is_valid():
             data = articulo_form.cleaned_data
-            articulo.titulo = data["nombre_titulo"]
-            articulo.subtitulo = data["nombre_subtitulo"]
+            articulo.titulo = data["titulo"]
+            articulo.subtitulo = data["subtitulo"]
+            articulo.cuerpo= data["cuerpo"]
+            articulo.autor = data["autor"]
+            articulo.imagen = data["imagen"]
+
             articulo.save()
-            return render(request, 'core/index.html')
+            return render(request, 'core/mostrar_articulos.html', {'articulo':articulo})
     else: #metodo get
-        articulo_form = ArticulosForm(initial={'nombre_titulo': Articulos.titulo, 'nombre_subtitulo': Articulos.subtitulo})
-    return render (request, 'core/editar_articulos.html', {'form':articulo_form })
+        articulo_form=ArticulosForm(initial={'titulo':articulo.titulo, 'subtitulo':articulo.subtitulo, 'cuerpo':articulo.cuerpo,'autor':articulo.autor, 'imagen':articulo.imagen})
+    return render (request, 'core/editar_articulos.html', {'articulo_form':articulo_form, 'articulo':articulo })
 
 @login_required
 def elimina_articulos(request, id_articulo): 
