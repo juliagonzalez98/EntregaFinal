@@ -15,7 +15,7 @@
 
         <input type="submit", value="Enviar">
         <br>
-        {% if request.user.avatar.imagen %}
+        {% if not request.user.avatar.imagen %}
         <td><a href="{% url 'agrega-avatar' %}">agregar avatar</a></td>
         {%endif%}
         <td><a href="{% url 'index' %}">VOLVER A INICIO</a></td>

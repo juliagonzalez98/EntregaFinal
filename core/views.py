@@ -4,17 +4,13 @@ from core.forms import ArticulosForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from user.models import Avatar
+from django.contrib.auth import get_user
 
 
 # Create your views here.
 
 def inicio(request):
-    try:
-        avatar = Avatar.objects.get(user=request.user)
-        context = {'imagen': avatar.imagen.url}
-    except Avatar.DoesNotExist:
-        context = {}
-    return render(request, 'core/index.html', context)
+    return render(request, 'core/index.html')
 
 @login_required
 def crea_articulos(request): 

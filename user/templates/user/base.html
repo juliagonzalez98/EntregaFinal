@@ -7,9 +7,6 @@
 {{mensaje}}
 {% endif %}
 
-{% if request.user.avatar %}
-    <img src="{{ request.user.avatar.imagen.url }}" alt="Avatar">
-  {% endif %}
 <td><a href="{% url 'index' %}">VOLVER A INICIO</a></td>
 <td><a href="{% url 'login' %}">INICIAR SESION</a></td>
 

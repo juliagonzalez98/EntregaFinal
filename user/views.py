@@ -55,18 +55,6 @@ def register(request):
         form = UserRegisterForm()     
     return render(request,"user/registro.html" , {"form":form})
 
-#def  agrega_avatar(request):
-    #if request.method == "POST":
-    #    miFormulario = AvatarForm(request.POST, request.FILES)
-
-    #    if miFormulario.is_valid():
-    #        u = User.objects.get(username=request.user)
-    #        avatar = Avatar(user = u, imagen=miFormulario.cleaned_data['imagen'])
-    #        avatar.save()
-    #        return render (request,"user/agrega_avatar.html", {"mensaje":"Usuario Creado Exitosamente"})
-    #else:
-    #    miFormulario = AvatarForm()
-    #return render(request, "user/agregar_avatar.html", {"miFormulario": miFormulario })
 
 @login_required
 def editarPerfil(request):
