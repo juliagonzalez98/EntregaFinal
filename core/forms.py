@@ -11,6 +11,7 @@ class ArticulosForm(forms.Form):
        autor = forms.CharField(max_length=100)
        fecha = forms.DateTimeField()
        imagen = forms.FileField(required=False, validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif'])], label="Imagen")
+       
 
     
 

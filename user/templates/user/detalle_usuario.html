@@ -17,18 +17,21 @@
             </tr>
             <tr>
                 <td>DESCRIPCION:</td>
-                <td>{{ usuario.descripcion }}</td>
+                <td>{{ descripcion }}</td>
             </tr>
             <tr>
-                <td>
-                    {% if usuario.imagen %}
-                        <img src="{{ usuario.imagen.url }}" style="height: 40px; width: 45px;">
-                    {% endif %}
+                <td>TU AVATAR ES
+                    {% if request.user.avatar %}
+                    <img src="{{ request.user.avatar.imagen.url }}" alt="Avatar" style="width: 100px; height: 100px; border: 2px solid black;">
+                  {% endif %}
                 </td>
             </tr>
         </table>
         <br>
+        <td><a href="{% url 'editar-perfil' %}">EDITAR MI PERFIL</a></td>
+        <br>
+        <td><a href="{% url 'index' %}">VOLVER A INICIO</a></td>
+        <br>
         <td><a href="{% url 'logout' %}">CERRAR SESION</a></td>
-        <td><a href="{% url 'index' %}">volver a inicio</a></td>
     </form>
 {% endblock contenido_que_cambia %}

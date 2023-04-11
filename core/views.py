@@ -3,13 +3,18 @@ from core.models import Articulos
 from core.forms import ArticulosForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-
+from user.models import Avatar
 
 
 # Create your views here.
 
 def inicio(request):
-    return render(request, 'core/index.html')
+    try:
+        avatar = Avatar.objects.get(user=request.user)
+        context = {'imagen': avatar.imagen.url}
+    except Avatar.DoesNotExist:
+        context = {}
+    return render(request, 'core/index.html', context)
 
 @login_required
 def crea_articulos(request): 
@@ -23,7 +28,8 @@ def crea_articulos(request):
            cuerpo = data["cuerpo"]
            autor = data["autor"]
            imagen = data["imagen"]
-           articulo = Articulos(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, imagen=imagen)
+           usuario = request.user
+           articulo = Articulos(titulo=titulo, subtitulo=subtitulo, cuerpo=cuerpo, autor=autor, imagen=imagen, usuario=usuario)
            articulo.save()
            id = articulo.id
            return render(request, 'core/mostrar_postcrear.html', {"mensaje": "Recomendacion agregada correctamente",'articulo':articulo}) #si sale todo bien nos manda a la lista de articulos
@@ -78,7 +84,7 @@ def elimina_articulos(request, id_articulo):
     articulo = Articulos.objects.get(id=id_articulo)
     name = articulo.titulo
 
-    if articulo.usuario == request.user:          
+    if articulo.usuario == request.user:         
       articulo.delete()
       return render (request, 'core/eliminar_articulos.html', {"articulo_eliminado": name} )
     else:

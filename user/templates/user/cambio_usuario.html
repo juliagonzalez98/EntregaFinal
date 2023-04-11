@@ -1,0 +1,17 @@
+{% extends 'user/base.html'%}
+{% block contenido_que_cambia %}
+    <h1>DETALLE DE LOS USUARIOS</h1>
+    {% if mensaje %}
+        <h2>{{ mensaje }}</h2>
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+  
+        <br>
+        <td><a href="{% url 'editar-perfil' %}">EDITAR MI PERFIL</a></td>
+        <br>
+        <td><a href="{% url 'index' %}">VOLVER A INICIO</a></td>
+        <br>
+        <td><a href="{% url 'logout' %}">CERRAR SESION</a></td>
+    </form>
+{% endblock contenido_que_cambia %}
