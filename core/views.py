@@ -61,7 +61,7 @@ def edita_articulos(request, id_articulo):
              articulo.imagen = data["imagen"]
 
 #verificamos si el usuario que intenta editar es el que creó el artículo
-            if articulo.usuario == request.user:
+            if articulo.usuario == request.user or request.user.is_staff:
                articulo.save()
                return render(request, 'core/mostrar_posteditar.html', {'articulo':articulo})
             else:
@@ -80,7 +80,7 @@ def elimina_articulos(request, id_articulo):
     articulo = Articulos.objects.get(id=id_articulo)
     name = articulo.titulo
 
-    if articulo.usuario == request.user:         
+    if articulo.usuario == request.user or request.user.is_staff:         
       articulo.delete()
       return render (request, 'core/eliminar_articulos.html', {"articulo_eliminado": name} )
     else:

@@ -71,7 +71,7 @@ def editarPerfil(request):
             usuario.save()
             cache.delete('user_{}'.format(request.user.pk))
 
-            return redirect('perfil', mensaje="Cambios guardados")
+            return render(request, 'user/detalle_usuario.html')
     else:
         miFormulario = UserEditForm(instance=usuario)
 
@@ -90,7 +90,7 @@ def AgregaAvatar(request):
     if request.method == "POST":
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            avatar = form.save()
+            avatar = form.save(commit=False)
             avatar.user = request.user
             avatar.save()
             clean_avatar_record_without_user()
