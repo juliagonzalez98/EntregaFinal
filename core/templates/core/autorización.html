@@ -1,0 +1,6 @@
+{% block contenido_que_cambia %}
+      {% csrf_token %}
+<p> NO ESTAS AUTORIZADO PARA REALIZAR ESTA ACCION </p>
+<a href="{% url 'index' %}">volver a inicio</a>
+
+{% endblock contenido_que_cambia %}

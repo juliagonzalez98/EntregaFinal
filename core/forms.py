@@ -10,7 +10,7 @@ class ArticulosForm(forms.Form):
        cuerpo = forms.CharField(widget=forms.Textarea, label="Ingrese una breve reseña del contenido elegido")
        autor = forms.CharField(max_length=100)
        fecha = forms.DateTimeField()
-       imagen = forms.FileField(validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif'])], label="Imagen")
+       imagen = forms.FileField(required=False, validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif'])], label="Imagen")
 
     
 

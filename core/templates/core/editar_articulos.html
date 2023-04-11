@@ -3,10 +3,12 @@
 {% block contenido_que_cambia %}
 <h1>Editar artículo</h1>
 
+{% if user.is_authenticated %}
 <form method="post">
+  
     {% csrf_token %}
     {{ articulo_form.as_p }}
     <button type="submit">Guardar cambios</button>
   </form>
-
+{% endif %}
 {% endblock contenido_que_cambia %}

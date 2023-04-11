@@ -54,8 +54,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'EntregaFinal.urls'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
 TEMPLATES = [
@@ -132,3 +131,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = "/user/login/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core/static')]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
